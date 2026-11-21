@@ -2,6 +2,10 @@
   <img src="./assets/readme/hero.svg" width="100%" alt="antigravity-convo-renamer hero showing Before and After Antigravity IDE sidebar titles formatted as MMDD | compact theme">
 </p>
 
+<p align="center">
+  <b>English</b> &nbsp;|&nbsp; <a href="./README.zh-CN.md">简体中文</a>
+</p>
+
 # antigravity-convo-renamer
 
 Keep your Antigravity IDE conversation sidebar readable. This utility automatically formats chat titles into date-prefixed, compact summaries (`MMDD｜<theme>`) within **10 Chinese characters (20 display units) or 15 ASCII characters**, and runs silently every 15 minutes via Windows Task Scheduler.
