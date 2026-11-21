@@ -1,0 +1,35 @@
+{
+  "timezone": "Asia/Shanghai",
+  "max_cjk_units": 20,
+  "max_eng_chars": 15,
+  "tech_allowlist": [
+    "STRIPE",
+    "SUPABASE",
+    "NEXTJS",
+    "FASTAPI"
+  ],
+  "custom_translations": {
+    "stripe integration progress check": "Stripe支付进度",
+    "database migration dry run": "数据库迁移演练"
+  },
+  "workspace_rules": [
+    {
+      "path_contains": "/my-coursework",
+      "skip_if_matches": "^(CourseA|CourseB|Capstone)-[-_A-Za-z0-9]+$",
+      "rules": [
+        {
+          "match_any": ["capstone", "final project"],
+          "title": "Capstone-FinalProject"
+        },
+        {
+          "match_any": ["coursea"],
+          "regex_extract": {
+            "pattern": "week\\s*(\\d+)",
+            "template": "CourseA-W{1}",
+            "fallback": "CourseA-Lab"
+          }
+        }
+      ]
+    }
+  ]
+}

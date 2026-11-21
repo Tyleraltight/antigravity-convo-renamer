@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1200" height="300" viewBox="0 0 1200 300"
+     role="img" aria-labelledby="wf-title wf-desc">
+  <title id="wf-title">Four-stage safe local rename pipeline</title>
+  <desc id="wf-desc">Architecture diagram showing step 1 hub and CLI discovery with loopback verification, step 2 bounds-checked protobuf scan, step 3 semantic sidebar compaction, and step 4 proxy-free localhost RPC update under a single-instance mutex.</desc>
+
+  <rect width="1200" height="300" rx="20" fill="#0F172A"/>
+  <rect x="1" y="1" width="1198" height="298" rx="19" fill="none" stroke="#1E293B" stroke-width="2"/>
+
+  <text x="44" y="48" fill="#F8FAFC" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700">How One Rename Pass Executes</text>
+  <text x="430" y="48" fill="#94A3B8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18">Named Mutex · ProxyHandler({}) · Idempotent Skip</text>
+
+  <!-- Connector arrows between 4 cards -->
+  <path d="M 284 170 L 312 170" stroke="#10B981" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 572 170 L 600 170" stroke="#10B981" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 860 170 L 888 170" stroke="#10B981" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Step 1 -->
+  <g transform="translate(44, 78)">
+    <rect width="244" height="184" rx="14" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+    <text x="18" y="34" fill="#10B981" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" font-weight="700">01 DISCOVER</text>
+    <text x="18" y="70" fill="#F8FAFC" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="21" font-weight="600">Hub + PID Check</text>
+    <text x="18" y="106" fill="#CBD5E1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18">Scan daemon/hub_*.json</text>
+    <text x="18" y="134" fill="#CBD5E1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18">Verify language_server</text>
+    <text x="18" y="162" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18">PID + 127.0.0.1 socket</text>
+  </g>
+
+  <!-- Step 2 -->
+  <g transform="translate(312, 78)">
+    <rect width="260" height="184" rx="14" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+    <text x="20" y="34" fill="#10B981" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" font-weight="700">02 PARSE</text>
+    <text x="20" y="70" fill="#F8FAFC" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="21" font-weight="600">Safe Protobuf Scan</text>
+    <text x="20" y="106" fill="#CBD5E1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18">Bounds-checked varint</text>
+    <text x="20" y="134" fill="#CBD5E1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18">Skip empty &amp; New Chat</text>
+    <text x="20" y="162" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18">O(1) UUID prompt read</text>
+  </g>
+
+  <!-- Step 3 -->
+  <g transform="translate(600, 78)">
+    <rect width="260" height="184" rx="14" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+    <text x="20" y="34" fill="#10B981" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" font-weight="700">03 COMPACT</text>
+    <text x="20" y="70" fill="#F8FAFC" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="21" font-weight="600">Semantic Budget</text>
+    <text x="20" y="106" fill="#CBD5E1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18">Apply rules.json first</text>
+    <text x="20" y="134" fill="#CBD5E1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18">Enforce 10 CJK / 15 Eng</text>
+    <text x="20" y="162" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18">Zero mid-word slicing</text>
+  </g>
+
+  <!-- Step 4 -->
+  <g transform="translate(888, 78)">
+    <rect width="268" height="184" rx="14" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+    <text x="20" y="34" fill="#10B981" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" font-weight="700">04 UPDATE</text>
+    <text x="20" y="70" fill="#F8FAFC" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="21" font-weight="600">Loopback RPC Write</text>
+    <text x="20" y="106" fill="#CBD5E1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18">Direct localhost POST</text>
+    <text x="20" y="134" fill="#CBD5E1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18">Bypass HTTP_PROXY</text>
+    <text x="20" y="162" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18">1MB rotating audit log</text>
+  </g>
+</svg>
