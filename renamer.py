@@ -123,6 +123,7 @@ DEFAULT_SEMANTIC_TERMS = [
     ("optimizing", "优化"),
     ("optimization", "优化"),
     ("optimize", "优化"),
+    ("refinement", "优化"),
     ("implementing", "实现"),
     ("implementation", "实现"),
     ("implement", "实现"),
@@ -542,6 +543,12 @@ def compact_chinese_or_mixed(text, max_units=DEFAULT_MAX_CJK_UNITS):
             if display_units(s) <= max_units:
                 return s.strip(" -_|｜")
 
+    if display_units(s) > max_units:
+        s = re.sub(r"[（(][^）)]*[）)]", "", s)
+        s = re.sub(r"^(?:同步|请|帮我)\s*", "", s).strip(" ，,。-_|｜")
+    if display_units(s) > max_units and any(p in s for p in ("，", ",", "。")):
+        s = re.split(r"[，,。]", s)[0].strip(" -_|｜")
+
     return s.strip(" -_|｜")
 
 
@@ -561,6 +568,9 @@ def translate_and_compact(raw_title, cfg=None):
     allowlist = cfg["tech_allowlist"]
 
     text = re.sub(r"^\d{4}[｜|]\s*", "", (raw_title or "").strip())
+    text = re.sub(r"^/[a-zA-Z0-9_-]+\s+", "", text)
+    text = re.sub(r"^(?:请?在当前[^\s，,。]{0,12}?项目中|请帮我|帮我)\s*", "", text)
+    text = re.sub(r"[，,。]?\s*(?:要求如下|具体如下|如下)[：:，,。]*$", "", text).strip()
     if not text:
         return ""
 

@@ -97,6 +97,14 @@ class TestCompactionAndRules(unittest.TestCase):
         mixed = renamer.translate_and_compact("综合整理IT与非IT两份求职简历", cfg)
         self.assertTrue(mixed.endswith("求职简历"))
 
+        # Slash-command raw prompt fallback strips boilerplate cleanly
+        raw_cmd = renamer.translate_and_compact(
+            "/start 请在当前电商项目中同步接入 2.75% 的在线支付手续费（Stripe 附加费），要求如下：",
+            cfg,
+        )
+        self.assertEqual(raw_cmd, "2.75% 在线支付手续费")
+        self.assertEqual(renamer.translate_and_compact("API UI/UX Refinement", cfg), "API UI/UX优化")
+
     def test_custom_rules_json_workspace_and_translations(self):
         with tempfile.TemporaryDirectory() as tmp:
             cfg_path = os.path.join(tmp, "rules.json")
